@@ -5,7 +5,7 @@ namespace luya\gallery\admin;
 use Yii;
 use luya\admin\components\AdminMenuBuilder;
 
-final class Module extends \luya\admin\base\Module
+class Module extends \luya\admin\base\Module
 {
     public $apis = [
         'api-gallery-album' => 'luya\gallery\admin\apis\AlbumController',

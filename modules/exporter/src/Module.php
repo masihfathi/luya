@@ -4,7 +4,7 @@ namespace luya\exporter;
 
 use luya\base\CoreModuleInterface;
 
-final class Module extends \luya\base\Module implements CoreModuleInterface
+class Module extends \luya\base\Module implements CoreModuleInterface
 {
     public $downloadPassword = false;
 

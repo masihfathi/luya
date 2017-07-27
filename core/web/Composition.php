@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Component;
 use luya\Exception;
 
+
 /**
  * Composition provides multi lingual handling and detection.
  *

@@ -6,17 +6,9 @@ One of the most powerfull tools in *LUYA*, is the **ANGULAR CRUD** surface, it c
 
 The word *NgRest* is explained as follows: A**Ng**ular**Rest** (Representational State Transfer)
 
-![ngrest-crud](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/ngrest-crud.png "NgRest Image")
+> In order to create a NgRest CRUD setup: Create an admin module (`./vendor/bin/luya module/create`), create a migration  with a database table (`./vendor/bin/luya migrate/create mytable modulename`) and the run `./vendor/bin/luya admin/crud/create`.
 
-> **Quick NgRest CRUD setup instructions:**
-> 1. Create an (admin) module `./vendor/bin/luya module/create`.
-> 2. Add the module to your application config within the modules section (see the generated README.md file in the module).
-> 3. Create a migration with a database table `./vendor/bin/luya migrate/create mytable modulename`.
-> 4. After preparation the migration file (addTable, fields) run the migration command `./vendor/bin/luya migrate`.
-> 5. Run `./vendor/bin/luya crud/create` and provide the needed informations (like module name, table name, etc.).
-> 6. Copy the terminal output to the previous generated Module file: `<YOUR_MODULE>/admin/Module.php`.
-> 7. Run the import command `./vendor/bin/luya import`
-> 8. Set permission in Admin under System -> User groups -> permission
+![ngrest-crud](https://raw.githubusercontent.com/luyadev/luya/master/docs/guide/img/ngrest-crud.png "NgRest Image")
 
 #### Steps to understand and create an NgRest Crud
 
@@ -32,7 +24,7 @@ Setup Crud:
 3. Define and Add the Api-Endpoint to your Module and enable the Authorizations
 4. Import and Setup privileges.
 
-## Creating the Model
+## 1. The Model
 
 We assume you have a made a table via the migrations (in your example below we assume you make a team module with members) and executue the migrations so you can no creat an `ActiveRecord` model for the provided table. The model represents the datasource for the REST API, you can create the model with the gii module extension or you can also generate the model and the rest of the classes with the `admin/crud/create` cli command.
 
@@ -120,7 +112,7 @@ class Member extends \luya\admin\ngrest\base\NgRestModel
 
 You can read more about the configuration of the NgRest in [NgRest Model Guide](ngrest-model.md).
 
-## Creating Controller and API
+## 2. Controller and API
 
 Each NgRest Crud needs an API (to make the rest call, create, update, list which are provided trough [Yii 2 RESTful](http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html)) and a controller which contains the angular template for your configure `ngRestConfig()`. The API and the Controller are basically only Gateways for the Output and do relate to the ngrest model:
 
@@ -164,7 +156,7 @@ and you can also force the api to always generate a pagination by setting `$pagi
 public $pagination = ['pageSize' => 100];
 ```
 
-## Creating the Api-Endpoint & Authorization
+## 3. Api-Endpoint & Authorization
 
 The last part of the ngrest process is the let your application know where your api is located (Yii2 controller namespace) and to make permission entries for the ngrest (who can create, update, delete and see the crud).
 
@@ -206,7 +198,7 @@ public function getMenu()
 
 The Icons `account` and `extension` are choosem from the google material icons: https://design.google.com/icons/. You can add as much nodes, groups and items as you want. The first argument of `node`, `group` and `itemApi` as the navigation button display in the administration area, you can wrapp them with Yii::t in order to make internalisations.
 
-## Import and Priviliges
+## 4. Import and Priviliges
 
 Run `./vendor/bin/luya import`, open the administration area and allocate the new menu items to a group. 
 

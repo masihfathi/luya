@@ -3,7 +3,7 @@ LUYA CHANGELOG
 
 All notable changes to this project will be documented in this file. This project make usage of the [Yii Versioning Strategy](https://github.com/yiisoft/yii2/blob/master/docs/internals/versions.md). In order to read more about upgrading and BC breaks have a look at the [UPGRADE Document](UPGRADE.md).
 
-1.0.0-RC4 (in progress)
+1.0.0 (in progress)
 -------------------
 
 ### Changed
@@ -19,8 +19,6 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
-- [#1375](https://github.com/luyadev/luya/issues/1375) Added Import Helper class which provides functions to parse CSV files to Arrays.
-- [#1332](https://github.com/luyadev/luya/issues/1332) Added Export Helper class in order to generate CSV Files from Arrays.
 - [#1312](https://github.com/luyadev/luya/issues/1312) ArrayHelper::generateRange for select dropdowns with numeric values.
 - [#1303](https://github.com/luyadev/luya/issues/1303) NgRest SelectModel valueField is automatically retrieved from the model class if no value is provided.
 - [#1291](https://github.com/luyadev/luya/issues/1291) Replace User Sidebar with User Dashboard to change Password.

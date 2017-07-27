@@ -10,7 +10,7 @@ use luya\admin\components\AdminMenuBuilder;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class Module extends \luya\admin\base\Module
+class Module extends \luya\admin\base\Module
 {
     public $apis = [
         'api-news-article' => 'luya\news\admin\apis\ArticleController',

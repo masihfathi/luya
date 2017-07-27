@@ -32,7 +32,7 @@ class ConcreptImplementationBlock implements BlockInterface
      */
     public function icon()
     {
-        return 'volumne';
+        return '<i class="fa fa-icon">icon</i>';
     }
     
     /**

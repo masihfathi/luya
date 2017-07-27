@@ -17,12 +17,7 @@ class TooltipTag extends BaseTag
 {
     public $position = 'left';
     
-    public function example()
-    {
-        return 'tooltip[Text](Overlay Tooltip Text)'; 
-    }
-    
-    public function readme()
+    public function markdown()
     {
         return 'Provide all informations to the administration interface, as tags are listed under help section and are visible to all administration users.';
     }

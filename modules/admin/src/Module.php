@@ -34,7 +34,7 @@ use luya\admin\importers\StorageImporter;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class Module extends \luya\admin\base\Module implements CoreModuleInterface
+class Module extends \luya\admin\base\Module implements CoreModuleInterface
 {
     /**
      * This event gets trigger before some trys to download a file.
@@ -70,7 +70,7 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
      */
     public $dashboardObjects = [
    		[
-       		'template' => '<table class="table"><tr ng-repeat="item in data"><td>{{item.user.firstname}} {{item.user.lastname}}</td><td>{{item.maxdate * 1000 | date:\'short\'}}</td></tr></table>', 
+       		'template' => '<table class="striped"><tr ng-repeat="item in data"><td>{{item.user.firstname}} {{item.user.lastname}}</td><td>{{item.maxdate * 1000 | date:\'short\'}}</td></tr></table>', 
        		'dataApiUrl' => 'admin/api-admin-common/last-logins',
        		'title' => ['admin', 'dashboard_lastlogin_title'],
    		],
@@ -249,8 +249,8 @@ final class Module extends \luya\admin\base\Module implements CoreModuleInterfac
     public function getMenu()
     {
         return (new AdminMenuBuilder($this))
-            ->nodeRoute('menu_node_filemanager', 'cloud_upload', 'admin/storage/index', 'admin/storage/index')
-            ->node('menu_node_system', 'settings_applications')
+            ->nodeRoute('menu_node_filemanager', 'folder_open', 'admin/storage/index', 'admin/storage/index')
+            ->node('menu_node_system', 'layers')
                 ->group('menu_group_access')
                     ->itemApi('menu_access_item_user', 'admin/user/index', 'person', 'api-admin-user')
                     ->itemApi('menu_access_item_group', 'admin/group/index', 'group', 'api-admin-group')

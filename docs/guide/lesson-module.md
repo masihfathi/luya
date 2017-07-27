@@ -23,12 +23,8 @@ After successfully executing you'll notice the created file structure in the `mo
 To register the module in LUYA you [have to edit the config file](https://luya.io/guide/app-module) according to your working environment. We'll edit the `configs/env-local.php` because we're developing in the local environment. To register both modules (admin and frontend), we're adding the `addressbook` and `addressbookadmin` module to the existent module section in the config file:
 
 ```php
-'modules' => [
-    /* ... */
-        
-    'addressbook' => 'app\modules\addressbook\frontend\Module',
-    'addressbookadmin' => 'app\modules\addressbook\admin\Module',
-],
+'addressbook' => 'app\modules\addressbook\frontend\Module',
+'addressbookadmin' => 'app\modules\addressbook\admin\Module',
 ``` 
 
 ## Creating the models and migrations

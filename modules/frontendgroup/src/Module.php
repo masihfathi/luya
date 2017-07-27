@@ -17,7 +17,7 @@ use luya\base\CoreModuleInterface;
  *
  * @author Basil Suter <basil@nadar.io>
  */
-final class Module extends \luya\base\Module implements BootstrapInterface, CoreModuleInterface
+class Module extends \luya\base\Module implements BootstrapInterface, CoreModuleInterface
 {
     /**
      *

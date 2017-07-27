@@ -69,6 +69,7 @@ public function ngRestScopes()
         ['delete', false],
     ];
 }
+$config->delete = true;
 ``` 
 
 This will trigger the  [Yii AR delete methode](http://www.yiiframework.com/doc-2.0/yii-db-activerecord.html#delete()-detail) and removes the item irrevocable, you can override the `delete()` method to change the behavior of a deletion.
@@ -225,7 +226,7 @@ public function ngRestConfig($config)
 Sometimes its usefull and common to directly manage relational data inside the current ngrest crud. Therefore we have created something called {{\luya\admin\ngrest\base\NgRestModel::ngRestRelations}}. Inside this method you can define relations which are also based on the NgRest concept.
 
 ```php
-public function ngRestRelations()
+public function ngRestRelation()
 {
     return [
         ['label' => 'The Label', 'apiEndpoint' => \path\to\ngRest\Model::ngRestApiEndpoint(), 'dataProvider' => $this->getSales()],

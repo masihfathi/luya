@@ -15,7 +15,7 @@ use yii\base\Controller;
  * This component is registered on each LUYA instance, how to use:
  *
  * ```php
- * if (Yii::$app->mail->compose('Subject', 'Message body of the Mail')->address('info@example.com')->send()) {
+ * if (Yii::$app->mail->compose('Subject', 'Message body of the Mail'->address('info@example.com')->send()) {
  *     echo "Mail has been sent!";
  * } else {
  *     echo "Error" : Yii::$app->mail->error;
@@ -196,20 +196,21 @@ class Mail extends \yii\base\Component
 
     /**
      * Render a view file for the given Controller context.
-     *
+     * 
      * Assuming the following example inside a controller:
-     *
+     * 
      * ```php
-     * Yii::$app->mail->compose('Send E-Mail')->render('@app/views/_mail', ['foo' => 'bar'])->address('info@luya.io')->send();
+     * Yii::$app->mail->compose('Send E-Mail')->render($this, 'mymail', ['foo' => 'bar'])->address('info@luya.io')->send();
      * ```
-     *
+     * 
+     * @param \yii\base\Controller $controller The controller context
      * @param string $viewFile The view file to render
      * @param array $params The parameters to pass to the view file.
      * @return \luya\components\Mail
      */
-    public function render($viewFile, array $params = [])
+    public function render(Controller $controller, $viewFile, array $params = [])
     {
-        $this->body(Yii::$app->view->render($viewFile, $params));
+        $this->body($controller->renderPartial($viewFile, $params));
         
         return $this;
     }
@@ -218,9 +219,9 @@ class Mail extends \yii\base\Component
     
     /**
      * Pass option parameters to the layout files.
-     *
+     * 
      * @param array $vars
-     * @return \luya\components\Mail
+     * @return \luya\components\Mail 
      */
     public function context(array $vars)
     {
@@ -387,7 +388,7 @@ class Mail extends \yii\base\Component
     
     /**
      * Add attachment.
-     *
+     * 
      * @param string $filePath The path to the file, will be checked with `is_file`.
      * @param string $name An optional name to use for the Attachment.
      * @return \luya\components\Mail
@@ -401,7 +402,7 @@ class Mail extends \yii\base\Component
     
     /**
      * Add ReplyTo Address.
-     *
+     * 
      * @param string $email
      * @param string $name
      * @return \luya\components\Mail

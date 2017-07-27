@@ -67,9 +67,7 @@ class Bootstrap extends BaseBootstrap
                 foreach ($this->getModules() as $id => $module) {
                     if ($module instanceof AdminModuleInterface) {
                         $this->_adminAssets = ArrayHelper::merge($module->getAdminAssets(), $this->_adminAssets);
-                        if ($module->getMenu()) {
-                            $this->_adminMenus[$module->id] = $module->getMenu();
-                        }
+                        $this->_adminMenus[$module->id] = $module->getMenu();
                         $this->_jsTranslations[$id] = $module->getJsTranslationMessages();
                     }
                 }

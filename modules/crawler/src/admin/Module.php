@@ -5,7 +5,7 @@ namespace luya\crawler\admin;
 use Yii;
 use luya\admin\components\AdminMenuBuilder;
 
-final class Module extends \luya\admin\base\Module
+class Module extends \luya\admin\base\Module
 {
     public $apis = [
         'api-crawler-builderindex' => 'luya\crawler\admin\apis\BuilderindexController',

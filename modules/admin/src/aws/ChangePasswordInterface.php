@@ -12,12 +12,14 @@ namespace luya\admin\aws;
  * {
  *    public function changePassword($newPassword, $newPasswordRepetition)
  *    {
- *        return $this->updateAttribute('password', Yii::$app->security->generatePasswordHash($newPassword));
+ *        if ($newPassword !== $newPasswordRepetition) {
+ *            $this->addError('password', 'The new password as not equals the old.');
+ *        }
+ *
+ *        $this->updateAttribute('password', sha1($newPassword));
  *    }
  * }
  * ```
- * 
- * The changePassword method must return whether the password change was successfull or not.
  *
  * @author Basil Suter <basil@nadar.io>
  */

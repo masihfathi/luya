@@ -2,30 +2,29 @@
 
 namespace luya\web\filters;
 
-use Yii;
 use yii\base\ActionFilter;
 use yii\base\InvalidCallException;
 use yii\helpers\VarDumper;
 
 /**
  * Prevent Robots from sending Forms.
- *
+ * 
  * This is a very basic spam protection method. If someone sends the form faster then in the
  * given {{luya\web\filters\RobotsFilter::delay}} time, an InvalidCallException will be thrown.
- *
+ * 
  * Usage:
- *
+ * 
  * ```php
  * public function behaviors()
  * {
  *     return [
  *         'robotsFilter' => RobotsFilter::class
  *     ];
- * }
+ * }    
  * ```
- *
+ * 
  * In order to configure the capture delay time use:
- *
+ * 
  * ```php
  * public function behaviors()
  * {
@@ -35,9 +34,9 @@ use yii\helpers\VarDumper;
  *             'delay' => 0.5,
  *         ]
  *     ];
- * }
+ * }    
  * ```
- *
+ * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -49,7 +48,7 @@ class RobotsFilter extends ActionFilter
     
     private function getRenderTime()
     {
-        return Yii::$app->session->get(self::ROBOTS_FILTER_SESSION_IDENTIFIER, time());
+        return Yii::$app->session->get(self::ROBOTS_FILTER_SESSION_IDENTIFIER, 0);
     }
     
     private function setRenderTime($time)
@@ -57,21 +56,13 @@ class RobotsFilter extends ActionFilter
         Yii::$app->session->set(self::ROBOTS_FILTER_SESSION_IDENTIFIER, $time);
     }
     
-    
-    private function getElapsedProcessTime()
-    {
-        return (int) (time() - $this->getRenderTime());
-    }
-    
     public function beforeAction($action)
     {
         if (Yii::$app->request->isPost) {
-            if ($this->getElapsedProcessTime() < $this->delay) {
+            if ((time() - $this->getRenderTime()) < $this->delay) {
                 throw new InvalidCallException("Robots Filter has detected an invalid Request: " . VarDumper::export(Yii::$app->request->post()));
             }
         }
-        
-        return true;
     }
     
     public function afterAction($action, $result)

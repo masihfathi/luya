@@ -263,133 +263,12 @@ class Storage
         return ['upload' => false, 'message' => 'no files selected or empty files list.', 'file_id' => 0];
     }
     
-    /**
-     * Example Input unform:
-     * 
-     * ```php
-        Array
-        (
-            [name] => Array
-                (
-                    [attachment] => Array
-                        (
-                            [0] => Altersfragen-Leimental (4).pdf
-                            [1] => Altersfragen-Leimental (2).pdf
-                        )
-        
-                )
-        
-            [type] => Array
-                (
-                    [attachment] => Array
-                        (
-                            [0] => application/pdf
-                            [1] => application/pdf
-                        )
-        
-                )
-        
-            [tmp_name] => Array
-                (
-                    [attachment] => Array
-                        (
-                            [0] => /tmp/phpNhqnwR
-                            [1] => /tmp/phpbZ8XSn
-                        )
-        
-                )
-        
-            [error] => Array
-                (
-                    [attachment] => Array
-                        (
-                            [0] => 0
-                            [1] => 0
-                        )
-        
-                )
-        
-            [size] => Array
-                (
-                    [attachment] => Array
-                        (
-                            [0] => 261726
-                            [1] => 255335
-                        )
-        
-                )
-        
-        )
-     * ```
-     * 
-     * to:
-     * 
-     * ```php
-     * 
-        Array
-        (
-            [0] => Array
-                (
-                    [name] => Altersfragen-Leimental (4).pdf
-                    [type] => application/pdf
-                    [tmp_name] => /tmp/phpNhqnwR
-                    [error] => 0
-                    [size] => 261726
-                )
-        
-            [1] => Array
-                (
-                    [name] => Altersfragen-Leimental (2).pdf
-                    [type] => application/pdf
-                    [tmp_name] => /tmp/phpbZ8XSn
-                    [error] => 0
-                    [size] => 255335
-                )
-        
-        )
-     * ```
-     * @param array $files
-     * @return array|unknown
-     */
-    public static function extractFilesDataFromMultipleFiles(array $files)
-    {
-        $data = [];
-        $i=0;
-        foreach ($files as $type => $field) {
-            foreach ($field as $fieldName => $values) {
-                if (is_array($values)) {
-                    foreach ($values as $key => $value) {
-                        $data[$key][$type] = $value;
-                    }
-                } else {
-                    $data[$i][$type] = $values;
-                }
-            }
-        }
-        
-        return $data;
-    }
     
-    /**
-     * Extract $_FILES array.
-     * 
-     * @param array $file
-     * @return array
-     */
-    public static function extractFilesDataFromFilesArray(array $file)
+    private static function extractFilesDataFromFilesArray(array $file)
     {
-        if (!isset($file['tmp_name'])) {
-            return [];
-        }
-        
         $files = [];
         if (is_array($file['tmp_name'])) {
             foreach ($file['tmp_name'] as $index => $value) {
-                // skip empty or none exsting tmp file names
-                if (!isset($file['tmp_name'][$index]) || empty($file['tmp_name'][$index])) {
-                    continue;
-                }
-                // create files structure array
                 $files[] = [
                     'name' => $file['name'][$index],
                     'type' => $file['type'][$index],
@@ -398,7 +277,7 @@ class Storage
                     'size' => $file['size'][$index],
                 ];
             }
-        } elseif (isset($file['tmp_name']) && !empty($file['tmp_name'])) {
+        } else {
             $files[] = [
                 'name' => $file['name'],
                 'type' => $file['type'],
@@ -411,19 +290,7 @@ class Storage
         return $files;
     }
     
-    /**
-     * 
-     * @param array $file An array with the following keys available:
-     * - name:
-     * - type:
-     * - tmp_name:
-     * - error:
-     * - size:
-     * @param number $toFolder
-     * @param string $isHidden
-     * @return array
-     */
-    protected static function verifyAndSaveFile(array $file, $toFolder = 0, $isHidden = false)
+    private static function verifyAndSaveFile(array $file, $toFolder = 0, $isHidden = false)
     {
         try {
             if ($file['error'] !== UPLOAD_ERR_OK) {

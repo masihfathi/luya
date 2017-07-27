@@ -26,7 +26,7 @@ class Login extends \luya\web\Asset
      * @var array A list of javascript files located in the $sourcePath folder.
      */
     public $js = [
-        'dist/js/login.js',
+        'js/login.js',
     ];
 
     /**
